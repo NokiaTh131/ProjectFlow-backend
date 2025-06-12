@@ -1,5 +1,6 @@
 package com.pjmj.pjmanage.controllers;
 
+import com.pjmj.pjmanage.dto.ProjectResponseDTO;
 import com.pjmj.pjmanage.dto.ProjectsDTO;
 import com.pjmj.pjmanage.models.Project;
 import com.pjmj.pjmanage.services.ProjectService;
@@ -28,9 +29,11 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Project>> getProject(@PathVariable Long id) {
-        return ResponseEntity.ok(projectService.getProjectById(id));
+    public ResponseEntity<Optional<ProjectResponseDTO>> getProject(@PathVariable Long id) {
+        Optional<ProjectResponseDTO> project = projectService.getProjectById(id);
+        return ResponseEntity.ok(project);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Optional<Project>> updateProject(@PathVariable Long id, @RequestBody Project project) {
